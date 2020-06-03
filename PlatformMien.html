@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1,use-scalable=no">
+    <title>李建帅</title>
+    <link rel="short icon" href="Resource/icon.png">
+    <link rel="stylesheet" href="ExternalStyle.css">
+
+    <style>
+        article{
+            margin: 20px;
+        }
+        h3{
+            color: red;
+            font-size: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #dddddd;
+        }
+        h4{
+            font-size: 14px;
+        }
+        p{
+            font-size: 12px;
+            text-indent: 2em;
+            line-height: 2em;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <span>平台风采</span>
+</header>
+<section class="DS_second_section">
+    <img src="Resource/banner4.png" alt="您好，网络错误">
+</section>
+
+<!--第三部分-->
+<article>
+    <h3 id="title"></h3>
+    <h4 id="subTitle"></h4>
+    <p id="info"></p>
+
+
+    <script>
+        var title_tag = document.getElementById("title");
+        var subTitle_tag = document.getElementById("subTitle");
+        var info_tag = document.getElementById("info");
+
+        var obj_title=window.localStorage.getItem("platform_title");
+        var obj_subTitle=window.localStorage.getItem("platform_subTitle");
+        var obj_info=window.localStorage.getItem("platform_info");
+        if(obj_title) {
+
+
+            title_tag.innerHTML = obj.title;
+            subTitle_tag.innerHTML = obj.subTitle;
+            info_tag.innerHTML = obj.info;
+        }
+
+        //第一步，创建请求对象（http），去服务端要数据接收服务端数据
+        var xhr =new XMLHttpRequest();
+        //第二步，与服务端建立连接（get/post),连接那个服务器，用连接服务器的哪个接口
+        xhr.open('get','https://mockapi.eolinker.com/2ZhGVxjacb39010e6753bd9c02ee803e6e3bfeab6e8007c/aboutus');
+        //设置请求头，告诉服务器传递的数据是以表单的形式传递
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        //第三步：向服务器传参
+
+        xhr.send();
+        //第四步：接收服务器返回的数据
+        xhr.onreadystatechange=function () {
+            //readState=4代表数据请求完成，status=200代表成功返回
+            if (xhr.readyState==4 && xhr.status==200){
+                //responseText包含服务端返回的数据
+                var responseData = JSON.parse(xhr.responseText);
+                var obj=responseData.data;
+                var title_tag=document.getElementById("title");
+                var subTitle_tag=document.getElementById("subTitle");
+                var  info_tag=document.getElementById("info");
+                window.localStorage.setItem("platform_title",obj.title);
+                window.localStorage.setItem("platform_subTitle",obj.subTitle);
+                window.localStorage.setItem("platform_info",obj.info);
+
+                title_tag.innerHTML=obj.title;
+                subTitle_tag.innerHTML=obj.subTitle;
+                info_tag.innerHTML=obj.info;
+
+
+            }
+        }
+
+
+    </script>
+</article>
+
+<footer>
+    <a href="DropletService.html" > <img src="Resource/nav10.png" alt=""> <span >小滴服务</span></a>
+    <a href="EnterpriseProject.html" > <img src="Resource/nav20.png" alt=""> <span>企业项目</span></a>
+    <a href="SearchProcess.html" > <img src="Resource/nav30.png" alt="" > <span>服务流程</span></a>
+    <a href="" > <img src="Resource/nav41.png" alt="" > <span style="color: red;">平台风采</span></a>
+    <a href="MyDroplet.html" > <img src="Resource/nav50.png" alt=""> <span>我的小滴</span></a>
+</footer>
+</body>
+</html>

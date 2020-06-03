@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1,use-scalable=no">
+    <title>李建帅</title>
+    <link rel="short icon" href="Resource/icon.png">
+    <link rel="stylesheet" href="ExternalStyle.css">
+    <style>
+        .i_head_div{
+            text-align: center;
+
+        }
+        .i_head_div img{
+            margin-top: 50px;
+        }
+        .i_inner_div{
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            width: 90%;
+            margin: 0 auto;
+            background: white;
+            height: 100px;
+            margin-top: 30px;
+        }
+        .i_inner_div div{
+            height: 50px;
+        }
+        .i_inner_div span{
+            padding-left: 15px;
+            font-size: 20px;
+            line-height: 50px;
+
+        }
+
+        input{outline: medium;background-color:transparent;border: 0; }
+        .i_login_div{
+            height: 50px;
+            background: rgb(36,92,161);
+            width: 90%;
+            margin: 0 auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+
+
+        }
+        .i_login_div input{
+            line-height: 50px;
+            font-size: 20px;
+            color: black;
+
+        }
+
+
+    </style>
+
+</head>
+<body>
+<header>
+    <span>登录</span>
+</header>
+<!--第二部分-->
+<div class="i_head_div">
+    <img src="Resource/head.png" alt="">
+</div>
+
+<form action="">
+    <div class="i_login_div">
+        <input id="id_btn" type="button"  value="登录" >
+    </div>
+    <script>
+        var btn=document.getElementById("id_btn");
+        btn.onclick=function () {
+            //第一步，创建请求对象（http），去服务端要数据接收服务端数据
+            var xhr =new XMLHttpRequest();
+            //第二步，与服务端建立连接（get/post),连接那个服务器，用连接服务器的哪个接口
+            xhr.open('get','https://mockapi.eolinker.com/2ZhGVxjacb39010e6753bd9c02ee803e6e3bfeab6e8007c/aboutus');
+            //设置请求头，告诉服务器传递的数据是以表单的形式传递
+            xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            //第三步：向服务器传参
+
+
+            //第四步：接收服务器返回的数据
+            xhr.onreadystatechange=function () {
+                //readState=4代表数据请求完成，status=200代表成功返回
+                if (xhr.readyState==4 && xhr.status==200){
+                    //responseText包含服务端返回的数据
+                    var responseData = JSON.parse(xhr.responseText);
+                    var str=responseData.code;
+                    if(str==1){
+                        location.href="PlatformMien.html";
+                    }else{
+                        location.href="https://www.baidu.com/?tn=57095150_8_oem_dg";
+                    }
+                }
+            }
+        }
+
+    </script>
+
+</form>
+</body>
+</html>
